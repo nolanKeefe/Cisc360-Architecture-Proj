@@ -1,0 +1,14 @@
+Bootstrap: docker
+From: nvidia/cuda:12.1.0-base-ubuntu22.04
+
+%post
+    apt-get update && apt-get install -y python3-pip
+    # Install PyTorch for a specific CUDA version (e.g., CUDA 12.1)
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+%environment
+    export LC_ALL=C
+
+%runscript
+    python3 -c "import torch; print('PyTorch Version:', torch.__version__)"
+

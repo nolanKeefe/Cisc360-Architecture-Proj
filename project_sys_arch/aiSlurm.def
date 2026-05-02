@@ -1,0 +1,27 @@
+#!/bin/bash
+#SBATCH --mem=64g
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --partition=gpuA100x4
+#SBATCH --account=halhajjar
+#SBATCH --job-name=pytorch_benchmark
+#SBATCH --time=00:30:00
+#SBATCH --output=benchmark_%j.out
+#SBATCH --gpus-per-node=1
+#SBATCH --gpus-per-task=1
+#SBATCH --gpu-bind=verbose,per_task:1
+
+module reset
+module list
+
+echo "===== Running CUSTOM PyTorch 2.9.0 Container ====="
+time apptainer run --nv \
+    /scratch/halhajjar/pytorch290_build/pytorch290.sif \
+    python3 benchmarkTest.py
+
+echo ""
+echo "===== Running NVIDIA NGC Container ====="
+time apptainer run --nv \
+    /sw/external/NGC/pytorch:22.02-py3 \
+    python3 benchmarkTest.py
