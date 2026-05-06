@@ -1,0 +1,6 @@
+Using CC = cc 
+Using CXX = CC 
+Using FC = ftn 
+Using F77 = ftn 
+Using F90 = ftn 
+Running "module reset". Resetting modules to system default. The following $MODULEPATH directories have been removed: None

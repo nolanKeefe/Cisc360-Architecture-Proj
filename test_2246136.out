@@ -1,0 +1,28 @@
+============================================================
+  Job ID     : 2246136
+  Node       : gh006
+  Started at : Tue May  5 10:22:38 AM CDT 2026
+  Arch       : aarch64
+============================================================
+  ✓ SIF found: /u/nkeefe/Pytorch_Install/pytorch260.sif
+
+── Test 1: PyTorch version and CUDA availability ───────────
+PyTorch version : 2.6.0a0+ecf3bae40a.nv25.01
+CUDA available  : True
+CUDA version    : 12.8
+GPU name        : NVIDIA GH200 120GB
+GPU count       : 1
+
+── Test 2: Small GPU computation ───────────────────────────
+Running on: cuda
+Result shape    : torch.Size([1000, 1000])
+Result device   : cuda:0
+Result dtype    : torch.float32
+Computation     : PASSED ✓
+
+============================================================
+  Test complete.
+  Check test_2246136.out for results.
+  If both tests passed, run: sbatch benchmark.sh
+  Finished at : Tue May  5 10:22:46 AM CDT 2026
+============================================================
