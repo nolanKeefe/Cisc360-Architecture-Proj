@@ -1,0 +1,181 @@
+============================================================
+  Job ID       : 2246334
+  Node         : gh047
+  Started at   : Tue May  5 11:45:17 AM CDT 2026
+  Arch         : aarch64
+============================================================
+
+Checking required files...
+  ✓ Custom SIF found   : /u/nkeefe/Pytorch_Install/pytorch260.sif
+  ✓ Benchmark found    : /u/nkeefe/Pytorch_Install/GPU_Benchmark.py
+  ✓ NGC SIF target     : /sw/user/NGC_containers/builds/pytorch_25.08-py3-libfabric-2.3.1-build-ofi.sif
+
+============================================================
+  RUN 1: Custom PyTorch Container (NGC 25.01 base)
+============================================================
+Started at: Tue May  5 11:45:17 AM CDT 2026
+
+════════════════════════════════════════════════════════════
+  PyTorch GPU Benchmark  —  gpu_benchmark.py
+════════════════════════════════════════════════════════════
+
+════════════════════════════════════════════════════════════
+  SYSTEM & ENVIRONMENT INFO
+════════════════════════════════════════════════════════════
+  Python        : 3.12.3
+  PyTorch       : 2.6.0a0+ecf3bae40a.nv25.01
+  CUDA available: True
+  CUDA version  : 12.8
+  cuDNN version : 90700
+  GPU count     : 1
+  GPU 0         : NVIDIA GH200 120GB  (95.0 GB VRAM)
+  Platform      : Linux-6.4.0-150600.23.53-64kb-aarch64-with-glibc2.39
+
+── Test 1: Matrix Multiplication — FP32 ───────────────────
+  Matrix size : 8192 x 8192
+  Repeats     : 50  (+ 5 warm-up)
+
+  Avg time     : 3.31 ms
+  Best time    : 2.88 ms
+  Worst time   : 4.65 ms
+  Throughput   : 332.67 TFLOPS
+
+── Test 2: Matrix Multiplication — FP16 (Tensor Cores) ────
+  Matrix size : 8192 x 8192
+  Repeats     : 50  (+ 5 warm-up)
+
+  Avg time     : 1.97 ms
+  Best time    : 1.60 ms
+  Worst time   : 2.36 ms
+  Throughput   : 559.34 TFLOPS
+
+── Test 3: 2D Convolution (CNN-style workload) ────────────
+  Input  : batch=64, channels=256, size=56x56
+  Filter : 512 filters, 3x3 kernel
+  Repeats: 50  (+ 5 warm-up)
+
+  Avg time     : 2.18 ms
+  Best time    : 1.97 ms
+  Worst time   : 2.29 ms
+
+── Test 4: Training Step — Forward + Backward Pass ────────
+  Model  : ResNet-style 4-layer conv network
+  Batch  : 64 x 3 x 224 x 224  (ImageNet-sized input)
+  Repeats: 50  (+ 5 warm-up)
+
+  Avg time     : 205.01 ms
+  Best time    : 202.06 ms
+  Worst time   : 208.81 ms
+
+── Test 5: GPU Memory Bandwidth ───────────────────────────
+  Tensor size : 2.0 GB
+  Repeats     : 20  (+ 5 warm-up)
+
+  Avg time     : 1.19 ms
+  Bandwidth    : 3368.4 GB/s
+
+════════════════════════════════════════════════════════════
+  BENCHMARK SUMMARY
+════════════════════════════════════════════════════════════
+  Test                                              Result
+  ──────────────────────────────────────── ───────────────
+  MatMul FP32 — avg latency                        3.31 ms
+  MatMul FP32 — throughput                       332.67 TFLOPS
+  MatMul FP16 — avg latency                        1.97 ms
+  MatMul FP16 — throughput                       559.34 TFLOPS
+  Conv2D — avg latency                             2.18 ms
+  Training step — avg latency                    205.01 ms
+  Memory bandwidth                              3368.36 GB/s
+
+  Save this output and compare it against
+  the same script run inside the NGC container.
+════════════════════════════════════════════════════════════
+Finished at: Tue May  5 11:45:37 AM CDT 2026
+
+Cooling down between runs (30 seconds)...
+
+============================================================
+  RUN 2: NVIDIA NGC Container (pre-installed)
+============================================================
+Started at: Tue May  5 11:46:07 AM CDT 2026
+
+════════════════════════════════════════════════════════════
+  PyTorch GPU Benchmark  —  gpu_benchmark.py
+════════════════════════════════════════════════════════════
+
+════════════════════════════════════════════════════════════
+  SYSTEM & ENVIRONMENT INFO
+════════════════════════════════════════════════════════════
+  Python        : 3.12.3
+  PyTorch       : 2.8.0a0+34c6371d24.nv25.08
+  CUDA available: True
+  CUDA version  : 13.0
+  cuDNN version : 91200
+  GPU count     : 1
+  GPU 0         : NVIDIA GH200 120GB  (95.0 GB VRAM)
+  Platform      : Linux-6.4.0-150600.23.53-64kb-aarch64-with-glibc2.39
+
+── Test 1: Matrix Multiplication — FP32 ───────────────────
+  Matrix size : 8192 x 8192
+  Repeats     : 50  (+ 5 warm-up)
+
+  Avg time     : 3.25 ms
+  Best time    : 2.89 ms
+  Worst time   : 3.58 ms
+  Throughput   : 338.48 TFLOPS
+
+── Test 2: Matrix Multiplication — FP16 (Tensor Cores) ────
+  Matrix size : 8192 x 8192
+  Repeats     : 50  (+ 5 warm-up)
+
+  Avg time     : 1.85 ms
+  Best time    : 1.58 ms
+  Worst time   : 2.05 ms
+  Throughput   : 593.74 TFLOPS
+
+── Test 3: 2D Convolution (CNN-style workload) ────────────
+  Input  : batch=64, channels=256, size=56x56
+  Filter : 512 filters, 3x3 kernel
+  Repeats: 50  (+ 5 warm-up)
+
+  Avg time     : 2.08 ms
+  Best time    : 1.94 ms
+  Worst time   : 2.26 ms
+
+── Test 4: Training Step — Forward + Backward Pass ────────
+  Model  : ResNet-style 4-layer conv network
+  Batch  : 64 x 3 x 224 x 224  (ImageNet-sized input)
+  Repeats: 50  (+ 5 warm-up)
+
+  Avg time     : 213.54 ms
+  Best time    : 211.04 ms
+  Worst time   : 215.28 ms
+
+── Test 5: GPU Memory Bandwidth ───────────────────────────
+  Tensor size : 2.0 GB
+  Repeats     : 20  (+ 5 warm-up)
+
+  Avg time     : 1.18 ms
+  Bandwidth    : 3376.8 GB/s
+
+════════════════════════════════════════════════════════════
+  BENCHMARK SUMMARY
+════════════════════════════════════════════════════════════
+  Test                                              Result
+  ──────────────────────────────────────── ───────────────
+  MatMul FP32 — avg latency                        3.25 ms
+  MatMul FP32 — throughput                       338.48 TFLOPS
+  MatMul FP16 — avg latency                        1.85 ms
+  MatMul FP16 — throughput                       593.74 TFLOPS
+  Conv2D — avg latency                             2.08 ms
+  Training step — avg latency                    213.54 ms
+  Memory bandwidth                              3376.77 GB/s
+════════════════════════════════════════════════════════════
+Finished at: Tue May  5 11:46:27 AM CDT 2026
+
+============================================================
+  All runs complete.
+  Results saved to: benchmark_2246334.out
+  Errors saved to : benchmark_2246334.err
+  Finished at     : Tue May  5 11:46:27 AM CDT 2026
+============================================================
